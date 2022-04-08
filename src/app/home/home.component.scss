@@ -1,0 +1,17 @@
+#ownership-label {
+  padding-right: 1rem;
+}
+
+#ownership, .label {
+  background-color: red;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#ownership {
+  width: auto !important;
+}
+
+#ownership:checked + .label {
+  background-color: green;
+}
