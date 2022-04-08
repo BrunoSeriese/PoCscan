@@ -13,13 +13,13 @@
       </div>
       <div class="col-lg-12 col-md-12">
         <div class="execute-right ">
-          <form method="post" class="hf-form hf-form-933 " data-id="933" data-title="Gratis Scan Aanvragen" data-slug="gratis-scan-aanvragen" data-message-success="Bedankt! We nemen z.s.m. contact met je op." data-message-invalid-email="Dit email-adres lijkt niet te kloppen." data-message-required-field-missing="Vul de vereiste velden in." data-message-error="Er is een fout opgetreden."><input type="hidden" name="_hf_form_id" value="933"><div style="display: none;"><input type="text" name="_hf_h933" value=""></div><div class="hf-fields-wrap"><div class="form-row">
-            <div class="form-column"> <input required="" type="text" name="naam" placeholder="Naam*" class="bg1" aria-label="Naam"></div>
-            <div class="form-column"><input required="" type="email" name="email" placeholder="Email*" class="bg2" aria-label="Email"></div>
-            <div class="form-column"><input required="" type="text" name="URL" placeholder="Website*" aria-label="Website"></div>
+          <form data-title="Gratis Scan Aanvragen" (submit)="submit(name.value, email.value, website.value, ownership.value)" data-message-success="De scan zal spoedig beginnen." data-message-invalid-email="Dit email-adres lijkt niet te kloppen." data-message-required-field-missing="Vul de vereiste velden in." data-message-error="Er is een fout opgetreden."><div class="form-row">
+            <div class="form-column"><input #name required="" type="text" name="naam" placeholder="Naam*" class="bg1" aria-label="Naam"></div>
+            <div class="form-column"><input #email required="" type="email" name="email" placeholder="Email*" class="bg2" aria-label="Email"></div>
+            <div class="form-column"><input #website required="" type="text" name="URL" placeholder="Website*" aria-label="Website"></div>
             <div class="form-column d-flex justify-content-center">
               <p id="ownership-label">Eigenaar*</p>
-              <input required="" type="checkbox" class="checkbox key" id="ownership" data-key="68" />
+              <input #ownership required="true" type="checkbox" class="checkbox key" id="ownership" data-key="68" />
               <label class="label" for="ownership">
                 <div class="ball"></div>
               </label>
@@ -27,7 +27,8 @@
 
             <div class="form-column"><input type="submit" value="GRATIS SCAN AANVRAGEN" aria-label="Verzenden"></div>
           </div>
-            <noscript>Activeer JavaScript om gebruik te maken van dit formulier.</noscript></div></form>
+            <noscript>Activeer JavaScript om gebruik te maken van dit formulier.</noscript>
+          </form>
         </div>
       </div>
     </div>
