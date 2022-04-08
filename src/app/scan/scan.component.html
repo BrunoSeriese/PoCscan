@@ -1,1 +1,22 @@
-<p>scan works!</p>
+ <div class="features__wrap container">
+    <div class="features__card">
+      <div class="features__card--box" *ngFor="let scanCategory of this.scanService.scanCategories index as i">
+        <div class="features__card--box--img">
+          <div class="circle">
+            <span></span>
+            <span></span>
+          </div>
+          <h4 [style.color]="scanCategory.result == undefined ? 'initial' : (scanCategory.result >= 7 ? 'green' : 'red')">
+            {{scanCategory.result != undefined ? scanCategory.result + "/10" : "?"}}
+          </h4>
+        </div>
+        <h4>
+          {{scanCategory.title}}
+        </h4>
+        <div *ngIf="scanCategory.loading == true && scanCategory.result == undefined" class="loading-bar"></div>
+      </div>
+    </div>
+  </div>
+
+
+
