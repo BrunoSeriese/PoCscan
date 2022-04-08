@@ -9,7 +9,8 @@ export class ScanComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+
   }
 
 }

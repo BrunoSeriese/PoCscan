@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
+import {ScanService} from "../scan/scan.service";
 
 @Component({
   selector: 'app-home',
@@ -7,10 +9,18 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-  constructor() { }
+  constructor(private router: Router,
+              private scanService: ScanService) {
+  }
 
-  public submit(name: string, email: string, website:string, ownership:string) {
-    console.log("submitted")
-    console.log(ownership)
+  public submit(name: string, email: string, website: string, ownership: string): void {
+    this.scanService.name = name;
+    this.scanService.email = email;
+    this.scanService.website = website;
+    this.scanService.ownership = ownership == "on";
+
+    console.log("hello")
+
+    this.router.navigate(["scan"]);
   }
 }
