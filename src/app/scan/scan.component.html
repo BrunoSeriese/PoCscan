@@ -1,6 +1,26 @@
- <div class="features__wrap container">
+<div class="features__wrap container">
+
+  <div class="line">
+    <span></span>
+    <span class="sml-line"></span>
+  </div>
+  <h2>Scannen Website - {{this.scanService.website}}</h2>
+  <div class="vwrap">
+    <div class="vmove">
+      <div class="vslide">
+        <p>62% van alle websites worden gehost op WordPress.</p>
+      </div>
+      <div class="vslide">
+        <p>XSS en Injection zijn de meest voorkomende website aanvallen.</p>
+      </div>
+      <div class="vslide">
+        <p>Get Big Marketing bied gratis advies aan voor je bedrijf over websites.</p>
+      </div>
+    </div>
+  </div>
+
     <div class="features__card">
-      <div class="features__card--box" *ngFor="let scanCategory of this.scanService.scanCategories index as i">
+      <div class="features__card--box" *ngFor="let scanCategory of this.scanService.scanCategories">
         <div class="features__card--box--img">
           <div class="circle">
             <span></span>
