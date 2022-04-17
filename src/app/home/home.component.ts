@@ -19,8 +19,6 @@ export class HomeComponent {
     this.scanService.website = website;
     this.scanService.ownership = ownership == "on";
 
-    console.log("hello")
-
     this.router.navigate(["scan"]);
   }
 }
