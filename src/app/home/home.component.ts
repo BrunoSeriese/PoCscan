@@ -15,14 +15,17 @@ export class HomeComponent {
   }
 
   public submit(name: HTMLInputElement, email: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement, form: NgForm): boolean {
-    if(form.invalid) {
-      ownership.reportValidity() || website.reportValidity() || email.reportValidity() || name.reportValidity();
-      return false;
+    for(let input of [name, email, website, ownership]) {
+      if(!input.checkValidity()) {
+        input.reportValidity();
+        return false;
+      }
     }
 
     this.scanService.name = name.value;
     this.scanService.email = email.value;
     this.scanService.website = website.value;
+    console.log(this.scanService.website)
     this.scanService.ownership = ownership.value == "on";
 
     this.router.navigate(["scan"]);

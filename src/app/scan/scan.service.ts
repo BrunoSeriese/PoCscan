@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ScanCategoryType} from "./scan-category.type";
 import {Iterator} from "./iterator.model";
-import {Executor} from "@angular/compiler-cli/ngcc/src/execution/api";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,8 @@ export class ScanService {
   private _ownership: boolean = false;
   private _scanCategories: ScanCategoryType[] = [];
 
-  constructor() {
-    this._scanCategories.push({title:"Headers", path:"", loading:false});
-    this._scanCategories.push({title:"XSS and Injection", path:"", loading:false});
-    this._scanCategories.push({title:"Certificates", path:"", loading:false});
-    this._scanCategories.push({title:"WordPress Vulnerabilities", path:"", loading:false});
-    this._scanCategories.push({title:"Version", path:"", loading:false});
-    this._scanCategories.push({title:"Login", path:"", loading:false});
-    this._scanCategories.push({title:"Data Security", path:"", loading:false});
-    this._scanCategories.push({title:"SEO", path:"", loading:false});
+  constructor(private http: HttpClient) {
+    this._scanCategories.push({title: "Headers", path: "", loading: false});
   }
 
   get name(): string {
@@ -64,7 +58,22 @@ export class ScanService {
     this._scanCategories = value;
   }
 
+  private filterWebsite() {
+    let searchValues: string[] = [
+      "https://",
+      "http://"
+    ]
+    for (let searchValue of searchValues) {
+      if(this.website.startsWith(searchValue)) {
+        this.website = this.website.slice(searchValue.length, this.website.length - 1)
+      }
+    }
+    let pathIndex = this.website.indexOf("/") > -1 ? this.website.indexOf("/") : 0;
+    this.website = this.website.slice(0, pathIndex);
+  }
+
   public start(): void {
+    this.filterWebsite();
     let iterator: Iterator<ScanCategoryType> = new Iterator<ScanCategoryType>(this._scanCategories);
     this.scan(iterator);
   }
@@ -76,10 +85,29 @@ export class ScanService {
     let scanCategory = iterator.next();
     scanCategory.loading = true;
 
-    await new Promise(r => setTimeout(r, 5 * 1000));
-
-    scanCategory.result = Math.floor(Math.random() * 10) + 1;
+    this.headerScan(scanCategory);
 
     this.scan(iterator);
+  }
+
+  private headerScan(scanCategory: ScanCategoryType): void {
+    this.invokeHeaderScan()
+      .subscribe( (value: any) => {
+        scanCategory.grade = value['grade'];
+        let scanId: number = value['scan_id'];
+        return this.getHeaderScanResult(scanId)
+          .subscribe((value: any) => {
+            scanCategory.result = value;
+          });
+      });
+  }
+
+  private invokeHeaderScan(): Observable<any> {
+    console.log("https://http-observatory.security.mozilla.org/api/v1/analyze?host=" + this.website)
+    return this.http.get("https://http-observatory.security.mozilla.org/api/v1/analyze?host=" + this.website);
+  }
+
+  private getHeaderScanResult(scanId: any): Observable<any> {
+    return this.http.get("https://http-observatory.security.mozilla.org/api/v1/getScanResults?scan=" + scanId);
   }
 }

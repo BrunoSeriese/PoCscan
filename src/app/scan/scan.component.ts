@@ -23,7 +23,6 @@ export class ScanComponent implements OnInit {
   }
 
   public mailResults(): void {
-    console.log("test")
     this.toastr.success("Resultaten verzonden", "", {
       tapToDismiss: true,
       positionClass: "toast-bottom-right",

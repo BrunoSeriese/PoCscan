@@ -1,5 +1,5 @@
 <div class="features__wrap container"
-     [ngSwitch]="this.scanService.scanCategories[this.scanService.scanCategories.length - 1].loading == true && this.scanService.scanCategories[this.scanService.scanCategories.length - 1].result != undefined">
+     [ngSwitch]="this.scanService.scanCategories[this.scanService.scanCategories.length - 1].loading == true && this.scanService.scanCategories[this.scanService.scanCategories.length - 1].grade != undefined">
   <div class="line">
     <span></span>
     <span class="sml-line"></span>
@@ -33,14 +33,14 @@
             <span></span>
             <span></span>
           </div>
-          <h4 [style.color]="scanCategory.result == undefined ? 'initial' : (scanCategory.result >= 7 ? 'green' : 'red')">
-            {{scanCategory.result != undefined ? scanCategory.result + "/10" : "?"}}
+          <h4 [style.color]="scanCategory.grade == undefined ? 'initial' : (scanCategory.grade <= 'C' ? 'green' : 'red')">
+            {{scanCategory.grade != undefined ? scanCategory.grade : "?"}}
           </h4>
         </div>
         <h4>
           {{scanCategory.title}}
         </h4>
-        <div *ngIf="scanCategory.loading == true && scanCategory.result == undefined" class="loading-bar"></div>
+        <div *ngIf="scanCategory.loading == true && scanCategory.grade == undefined" class="loading-bar"></div>
       </div>
     </div>
   </div>
