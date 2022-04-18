@@ -68,7 +68,7 @@ export class ScanService {
         this.website = this.website.slice(searchValue.length, this.website.length - 1)
       }
     }
-    let pathIndex = this.website.indexOf("/") > -1 ? this.website.indexOf("/") : 0;
+    let pathIndex = this.website.indexOf("/") > -1 ? this.website.indexOf("/") : this.website.length;
     this.website = this.website.slice(0, pathIndex);
   }
 
@@ -103,7 +103,6 @@ export class ScanService {
   }
 
   private invokeHeaderScan(): Observable<any> {
-    console.log("https://http-observatory.security.mozilla.org/api/v1/analyze?host=" + this.website)
     return this.http.get("https://http-observatory.security.mozilla.org/api/v1/analyze?host=" + this.website);
   }
 

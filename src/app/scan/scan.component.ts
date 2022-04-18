@@ -11,7 +11,6 @@ export class ScanComponent implements OnInit {
 
   constructor(public scanService: ScanService,
               public toastr: ToastrService ) {
-
   }
 
   public ngOnInit() {

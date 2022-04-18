@@ -25,7 +25,6 @@ export class HomeComponent {
     this.scanService.name = name.value;
     this.scanService.email = email.value;
     this.scanService.website = website.value;
-    console.log(this.scanService.website)
     this.scanService.ownership = ownership.value == "on";
 
     this.router.navigate(["scan"]);
