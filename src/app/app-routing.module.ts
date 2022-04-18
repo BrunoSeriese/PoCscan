@@ -16,6 +16,11 @@ const routes: Routes = [
     loadChildren: () => import("./scan/scan.module").then(m => m.ScanModule)
   },
   {
+    path: 'home?',
+    redirectTo: 'scan',
+    pathMatch: 'full'
+  },
+  {
     path: '**',
     redirectTo: '404',
     pathMatch: 'full'

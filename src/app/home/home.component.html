@@ -13,13 +13,13 @@
       </div>
       <div class="col-lg-12 col-md-12">
         <div class="execute-right ">
-          <form data-title="Gratis Scan Aanvragen" (submit)="submit(name.value, email.value, website.value, ownership.value)" data-message-success="De scan zal spoedig beginnen." data-message-invalid-email="Dit email-adres lijkt niet te kloppen." data-message-required-field-missing="Vul de vereiste velden in." data-message-error="Er is een fout opgetreden."><div class="form-row">
-            <div class="form-column"><input #name required="" type="text" name="naam" placeholder="Naam*" class="bg1" aria-label="Naam"></div>
-            <div class="form-column"><input #email required="" type="email" name="email" placeholder="Email*" class="bg2" aria-label="Email"></div>
-            <div class="form-column"><input #website required="" type="text" name="URL" placeholder="Website*" aria-label="Website"></div>
+          <form id="scanForm" #scanForm="ngForm" (ngSubmit)="submit(name, email, website, ownership, scanForm)"><div class="form-row">
+            <div class="form-column"><input name="naam" ngModel #name required type="text" placeholder="Naam*" class="form-control bg1" aria-label="Naam"></div>
+            <div class="form-column"><input name="email" ngModel #email required type="email" placeholder="Email*" class="form-control bg2" aria-label="Email"></div>
+            <div class="form-column"><input name="website" ngModel #website required type="text" placeholder="Website*" class="form-control" aria-label="Website"></div>
             <div class="form-column d-flex justify-content-center">
               <p id="ownership-label">Eigenaar*</p>
-              <input #ownership required="true" type="checkbox" class="checkbox key" id="ownership" data-key="68" />
+              <input name="ownership" ngModel #ownership required="true" type="checkbox" class="form-control checkbox key" id="ownership" data-key="68" />
               <label class="label" for="ownership">
                 <div class="ball"></div>
               </label>
@@ -33,3 +33,4 @@
       </div>
     </div>
   </div></section>
+
