@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ScanService} from "./scan.service";
 import {ToastrService} from "ngx-toastr";
+import {PdfService} from "../pdf/pdf.service";
 
 @Component({
   selector: 'app-scan',
@@ -8,9 +9,9 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./scan.component.scss']
 })
 export class ScanComponent implements OnInit {
-
   constructor(public scanService: ScanService,
-              public toastr: ToastrService ) {
+              private toastr: ToastrService,
+              private pdfService: PdfService) {
   }
 
   public ngOnInit() {
@@ -27,6 +28,7 @@ export class ScanComponent implements OnInit {
       positionClass: "toast-bottom-right",
       timeOut: 1500
     });
+    this.pdfService.generatePDF(this.scanService.scanCategories, this.scanService.name, this.scanService.website);
   }
 
 }

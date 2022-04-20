@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 export class ScanService {
   private _name: string = "";
   private _email: string = "";
-  private _website: string = "";
+  private _website: string = "https://www.google.com/";
   private _ownership: boolean = false;
   private _scanCategories: ScanCategoryType[] = [];
 
