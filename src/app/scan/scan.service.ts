@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 export class ScanService {
   private _name: string = "";
   private _email: string = "";
-  private _website: string = "https://www.google.com/";
+  private _website: string = "";
   private _ownership: boolean = false;
   private _scanCategories: ScanCategoryType[] = [];
 
@@ -93,7 +93,9 @@ export class ScanService {
   private headerScan(scanCategory: ScanCategoryType): void {
     this.invokeHeaderScan()
       .subscribe( (value: any) => {
-        scanCategory.grade = value['grade'];
+        let grades: {[key: string]: number} = {'A+': 10, 'A': 9.5, 'A-':9, 'B+': 8.5, 'B': 8, 'B-': 7.5, 'C+': 7, 'C': 6, 'C-': 5, 'D+': 4, 'D': 3, 'D-': 2, 'F': 1};
+        let grade: string = value['grade'];
+        scanCategory.grade = grades[grade];
         let scanId: number = value['scan_id'];
         return this.getHeaderScanResult(scanId)
           .subscribe((value: any) => {

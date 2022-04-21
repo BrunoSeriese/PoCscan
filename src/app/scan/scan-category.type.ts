@@ -2,6 +2,6 @@ export type ScanCategoryType = {
   title: string;
   path: string;
   loading: boolean;
-  grade?: string;
+  grade?: number;
   result?: any;
 }
